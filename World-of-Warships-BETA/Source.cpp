@@ -64,7 +64,7 @@ void B_Draw()// работает все нормально, чекнуть сдвиги
 		printf(" %d ", j);
 		for (int i = 0; i < width; i++)
 		{
-			printf("(%c)", B_field[j][i]);
+			printf("[%c]", B_field[j][i]);
 
 			if (i == (width - 1))
 				printf("\n");
@@ -88,7 +88,7 @@ void P_Draw()// работает все нормально, чекнуть сдвиги
 		printf(" %d ", j);
 		for (int i = 0; i < width; i++)
 		{
-			printf("(%c)", P_field[j][i]);
+			printf("[%c]", P_field[j][i]);
 
 			if (i == (width - 1))
 				printf("\n");
@@ -110,7 +110,7 @@ void T_Draw()
 		printf(" %d ", j);
 		for (int i = 0; i < width; i++)
 		{
-			printf("(%c)", P_T_field[j][i]);
+			printf("[%c]", P_T_field[j][i]);
 
 			if (i == (width - 1))
 				printf("\n");
@@ -634,14 +634,7 @@ void P_Setup()
 	{
 		for (int i = 0; i < width; i++)
 		{
-			if (i == 0)
-			{
-				P_field[j][i] = (char)i;
-			}
-			else
-			{
-				P_field[j][i] = ' ';
-			}
+			P_field[j][i] = ' ';
 		}
 	}
 }
@@ -1536,7 +1529,6 @@ void P_Enter()
 					pause();
 					goto loop1;
 				}
-						 //int** ship, int deck, int ship_type _________________________first call!
 				P_Placement(x, y, type, deck, number);
 				add_P_ban_locality();
 				DRAW();
@@ -1603,6 +1595,7 @@ void P_Enter()
 			}
 		}
 	}
+	setup_undone = false;
 }
 
 
@@ -1630,14 +1623,9 @@ int main(void)
 	B_Setup();
 	DRAW();
 	P_Enter();
-	setup_undone = false;
 	B_Enter();
 	create_array_of_targets();
 	game();
-	//B_Draw();
-	//listprint(&list_p);
-	
-	/*game();*/
 	pause();
 	
 	return 0;
